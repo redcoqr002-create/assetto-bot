@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assetto Corsa Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🏎 سيرفر طيب الرقدة</h1>
+    <p id="status">Loading...</p>
+  </header>
+
+  <section class="info">
+    <div class="card">
+      <h2>👥 Players</h2>
+      <p id="players">0/0</p>
+    </div>
+    <div class="card">
+      <h2>⏱ Time</h2>
+      <p id="time">--</p>
+    </div>
+    <div class="card">
+      <h2>🌦 Weather</h2>
+      <p id="weather">--</p>
+    </div>
+    <div class="card">
+      <h2>🗺 Track</h2>
+      <p id="track">--</p>
+    </div>
+    <div class="card">
+      <h2>📶 Ping</h2>
+      <p id="ping">0 ms</p>
+    </div>
+  </section>
+
+  <section class="chart">
+    <canvas id="playersChart"></canvas>
+  </section>
+
+  <section class="join">
+    <a href="https://acstuff.ru/s/q:race/online/join?ip=38.54.76.50&httpPort=8520" target="_blank">
+      🎮 Join Server
+    </a>
+  </section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

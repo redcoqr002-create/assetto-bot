@@ -1,0 +1,52 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #0f172a;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 20px;
+  background-color: #1e293b;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px;
+}
+
+.card {
+  background-color: #1e293b;
+  padding: 20px;
+  border-radius: 15px;
+  width: 150px;
+}
+
+.chart {
+  max-width: 700px;
+  margin: 20px auto;
+  background-color: #1e293b;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.join a {
+  display: inline-block;
+  margin: 20px;
+  padding: 15px 30px;
+  background-color: #00ff88;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.join a:hover {
+  background-color: #00cc66;
+}
