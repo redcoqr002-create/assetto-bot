@@ -4,48 +4,55 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Assetto Corsa Dashboard</title>
-<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Arial; background: #121212; color: #fff; padding: 20px; }
+h1 { text-align: center; margin-bottom: 20px; }
+.card { background: #1f1f1f; padding: 15px; margin-bottom: 15px; border-radius: 10px; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>🏎 سيرفر طيب الرقدة</h1>
-    <p id="status">Loading...</p>
-  </header>
+<h1>🏎 Assetto Corsa Dashboard</h1>
+<div class="card">
+  <p><strong>Players:</strong> <span id="players">0/16</span></p>
+  <p><strong>Track:</strong> <span id="track">Unknown</span></p>
+  <p><strong>Car:</strong> <span id="car">Unknown</span></p>
+  <p><strong>Time:</strong> <span id="time">Unknown</span></p>
+  <p><strong>Weather:</strong> <span id="weather">Unknown</span></p>
+</div>
+<canvas id="playerChart" width="400" height="100"></canvas>
 
-  <section class="info">
-    <div class="card">
-      <h2>👥 Players</h2>
-      <p id="players">0/0</p>
-    </div>
-    <div class="card">
-      <h2>⏱ Time</h2>
-      <p id="time">--</p>
-    </div>
-    <div class="card">
-      <h2>🌦 Weather</h2>
-      <p id="weather">--</p>
-    </div>
-    <div class="card">
-      <h2>🗺 Track</h2>
-      <p id="track">--</p>
-    </div>
-    <div class="card">
-      <h2>📶 Ping</h2>
-      <p id="ping">0 ms</p>
-    </div>
-  </section>
+<script>
+const ctx = document.getElementById('playerChart').getContext('2d');
+const chart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Players'],
+    datasets: [{
+      label: 'Players Online',
+      data: [0],
+      backgroundColor: ['#00ff88']
+    }]
+  },
+  options: { scales: { y: { beginAtZero: true, max: 16 } } }
+});
 
-  <section class="chart">
-    <canvas id="playersChart"></canvas>
-  </section>
+async function updateDashboard() {
+  const res = await fetch('/api/server');
+  const data = await res.json();
 
-  <section class="join">
-    <a href="https://acstuff.ru/s/q:race/online/join?ip=38.54.76.50&httpPort=8520" target="_blank">
-      🎮 Join Server
-    </a>
-  </section>
+  document.getElementById('players').textContent = `${data.clients}/${data.maxclients}`;
+  document.getElementById('track').textContent = data.track;
+  document.getElementById('car').textContent = data.car;
+  document.getElementById('time').textContent = data.time;
+  document.getElementById('weather').textContent = data.weather;
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
+  chart.data.datasets[0].data[0] = data.clients;
+  chart.update();
+}
+
+setInterval(updateDashboard, 5000);
+updateDashboard();
+</script>
 </body>
 </html>
